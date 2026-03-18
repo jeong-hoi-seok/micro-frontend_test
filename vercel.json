@@ -1,0 +1,21 @@
+{
+  "buildCommand": "npm run install:all && npm run build",
+  "outputDirectory": "dist",
+  "headers": [
+    {
+      "source": "/header/(.*)",
+      "headers": [
+        { "key": "Access-Control-Allow-Origin", "value": "*" }
+      ]
+    },
+    {
+      "source": "/banner/(.*)",
+      "headers": [
+        { "key": "Access-Control-Allow-Origin", "value": "*" }
+      ]
+    }
+  ],
+  "rewrites": [
+    { "source": "/((?!header|banner).*)", "destination": "/index.html" }
+  ]
+}

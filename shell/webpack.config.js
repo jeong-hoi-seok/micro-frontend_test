@@ -4,14 +4,19 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { ModuleFederationPlugin } = require("webpack").container;
 const path = require("path");
 
-const HEADER_URL = process.env.HEADER_URL || "http://localhost:3001";
-const BANNER_URL = process.env.BANNER_URL || "http://localhost:3002";
+const isProduction = process.env.NODE_ENV === "production";
+
+// 프로덕션에서는 같은 도메인의 하위 경로로 remote를 가져옴
+const HEADER_URL = process.env.HEADER_URL || (isProduction ? "/header" : "http://localhost:3001");
+const BANNER_URL = process.env.BANNER_URL || (isProduction ? "/banner" : "http://localhost:3002");
 
 module.exports = {
-  mode: "development",
+  mode: isProduction ? "production" : "development",
   entry: "./src/index.js",
   output: {
+    path: path.resolve(__dirname, "dist"),
     publicPath: "auto",
+    clean: true,
   },
   devServer: {
     port: 3000,

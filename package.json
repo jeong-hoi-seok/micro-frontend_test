@@ -3,9 +3,15 @@
   "private": true,
   "scripts": {
     "start": "concurrently \"npm start --prefix header\" \"npm start --prefix banner\" \"npm start --prefix shell\"",
-    "install:all": "npm install --prefix shell && npm install --prefix header && npm install --prefix banner"
+    "install:all": "npm install --prefix shell && npm install --prefix header && npm install --prefix banner",
+    "build": "npm run build:header && npm run build:banner && npm run build:shell && npm run build:merge",
+    "build:header": "cd header && npx cross-env NODE_ENV=production webpack --mode production",
+    "build:banner": "cd banner && npx cross-env NODE_ENV=production webpack --mode production",
+    "build:shell": "cd shell && npx cross-env NODE_ENV=production webpack --mode production",
+    "build:merge": "node scripts/merge-dist.js"
   },
   "devDependencies": {
-    "concurrently": "^9.1.0"
+    "concurrently": "^9.1.0",
+    "cross-env": "^10.1.0"
   }
 }
