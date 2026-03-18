@@ -22,3 +22,16 @@ export async function mountBanner(container) {
     container.innerHTML = '<div style="padding:16px;background:#fee;color:#c00;">Banner 로딩 실패 — banner 앱이 실행 중인지 확인하세요 (port 3002)</div>';
   }
 }
+
+export async function mountField(container) {
+  try {
+    const React = await import("react");
+    const ReactDOM = await import("react-dom/client");
+    const FieldWidget = (await import("field/FieldWidget")).default;
+    const root = ReactDOM.createRoot(container);
+    root.render(React.createElement(FieldWidget));
+  } catch (err) {
+    console.error("[Shell] Failed to load FieldWidget:", err);
+    container.innerHTML = '<div style="padding:16px;background:#fee;color:#c00;">FieldWidget 로딩 실패 — field 앱 배포 상태를 확인하세요</div>';
+  }
+}
