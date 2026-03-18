@@ -1,0 +1,11 @@
+{
+  "name": "micro-frontend-test",
+  "private": true,
+  "scripts": {
+    "start": "concurrently \"npm start --prefix header\" \"npm start --prefix banner\" \"npm start --prefix shell\"",
+    "install:all": "npm install --prefix shell && npm install --prefix header && npm install --prefix banner"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0"
+  }
+}
